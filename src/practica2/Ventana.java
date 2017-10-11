@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.Icon;
@@ -17,10 +19,7 @@ import javax.swing.JTextField;
 
 public class Ventana extends JFrame {
 
-    int filas = 4;
-    int columnas = 4;
-    Btn[][] botones ;
-
+    Btn[][] botones;
 
     private JLabel Jug;
     private JLabel Vel;
@@ -39,8 +38,7 @@ public class Ventana extends JFrame {
         setTitle("Game Of Life");
         setDefaultCloseOperation(Ventana.EXIT_ON_CLOSE);
         setLayout(null);
-        
-        
+
         Jug = new JLabel("Gamer : ");
         ju = new JLabel();
         Vel = new JLabel("Velocidad: ");
@@ -48,9 +46,7 @@ public class Ventana extends JFrame {
         vel = new JComboBox(V);
         Pausa = new JButton("Pausa");
         Tablero = new JPanel();
-        
-        
-        
+
         Tablero.setBackground(Color.DARK_GRAY);
         Tablero.setBounds(150, 30, 300, 300);
         Tablero.setLayout(null);
@@ -69,23 +65,51 @@ public class Ventana extends JFrame {
         Pausa.reshape(10, 150, 100, 30);
         Btn1();
 
+        Pausa.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent evt) {
+                PausaActionPerformed(evt);
+            }
+
+            private void PausaActionPerformed(ActionEvent evt) {
+                Hilo h= new Hilo();
+       Pausa.setEnabled(false);
+       h.start();
+
+            }
+
+        });
+
     }
 
+
+
     public void Btn1() {
-       int n=5;
-        int tam= n;
+        int n = 5;
+        int tam = n;
         botones = new Btn[tam][tam];
-        Tablero.setLayout(new GridLayout(tam,tam));
-       
-      
+        Tablero.setLayout(new GridLayout(tam, tam));
+
         for (int i = 0; i < botones.length; i++) {
             for (int j = 0; j < botones[i].length; j++) {
-                botones[i][j] = new Btn( i, j, 52, 52);
+                botones[i][j] = new Btn(i, j, 52, 52);
                 Tablero.add(botones[i][j]);
             }
 
         }
         Tablero.updateUI();
+    }
+    
+    
+        private class Hilo extends Thread{
+        public void Run() {
+            
+            botones[3][2].setBackground(Color.yellow);
+            botones[3][2].setText("HOLA");
+            
+      
+
+        }
     }
 
 }

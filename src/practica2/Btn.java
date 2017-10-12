@@ -17,6 +17,7 @@ public class Btn extends JButton implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
      setBackground(Color.BLUE);
+     setText(".");
     }
     
 }

@@ -64,7 +64,7 @@ public class Ventana extends JFrame {
         vel.reshape(10, 100, 70, 20);
         Pausa.reshape(10, 150, 100, 30);
         Btn1();
-
+        llenar();
         Pausa.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent evt) {
@@ -72,17 +72,45 @@ public class Ventana extends JFrame {
             }
 
             private void PausaActionPerformed(ActionEvent evt) {
-                Hilo h= new Hilo();
-       Pausa.setEnabled(false);
-       h.start();
+                //Hilo h = new Hilo();
+                //Pausa.setEnabled(false);
+                //h.start();
+                for (int i = 0; i < botones.length; i++) {
+                    for (int j = 0; j < botones[i].length; j++) {
+                        if (botones[i][j].getText().equals(".")) {
+                            for (int k = j-1; k < j+2; k++) {
+                                if (botones[i-1][k].getText().equals("")||botones[j-1][k].getText().equals("")) {
+                                    botones[i-1][k].setBackground(Color.DARK_GRAY);
+                                    botones[i-1][k].setText("");
+                                    botones[k][j-1].setBackground(Color.BLACK);
+                                    botones[k][j-1].setText("");
+                                }
+                            }
+                            
+                        }/*else 
+                            if (botones[i][j].getText().equals("")) {
+                                
+                                for (int k = j-1; k < j+2; k++) {
+                                    if (botones[i-1][k].getText().equals(".")||botones[j-1][k].getText().equals(".")) {
+                                        
+                                        botones[i-1][k].setBackground(Color.WHITE);
+                                        botones[i-1][k].setText(".");
+                                        
+                                    }
+                                }
+                                     
+                            
+                        }*/
+                        
+                        
+                    }
+                }
 
             }
 
         });
 
     }
-
-
 
     public void Btn1() {
         int n = 5;
@@ -99,15 +127,19 @@ public class Ventana extends JFrame {
         }
         Tablero.updateUI();
     }
-    
-    
-        private class Hilo extends Thread{
-        public void Run() {
-            
+
+    public void llenar() {
+
+        
+
+    }
+
+    private class Hilo extends Thread {
+
+        public void run() {
+
             botones[3][2].setBackground(Color.yellow);
             botones[3][2].setText("HOLA");
-            
-      
 
         }
     }

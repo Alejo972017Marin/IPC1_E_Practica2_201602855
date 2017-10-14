@@ -19,9 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Ventana extends JFrame {
-
+    Inicio In= new Inicio();
     Btn[][] botones;
-
+    int n;
     private JLabel Jug;
     private JLabel Vel;
     private static JLabel ju;
@@ -29,11 +29,13 @@ public class Ventana extends JFrame {
     private JComboBox vel;
     private JPanel Tablero;
     private JButton Pausa;
-    int Tam;
-    static String JU;
+    
     String V[] = {"10", "20", "30", "40", "50", "60", "70", "80", "90", "100"};
 
     public Ventana() {
+        
+       
+        
 
         setSize(500, 400);
         setTitle("Game Of Life");
@@ -71,59 +73,11 @@ public class Ventana extends JFrame {
             public void actionPerformed(ActionEvent evt) {
                 PausaActionPerformed(evt);
             }
-int conti=0;
-int contj=0;
+
             private void PausaActionPerformed(ActionEvent evt) {
                 Hilo h = new Hilo();
                 Pausa.setEnabled(false);
                 h.start();
-               /*
-                for (int i = 1; i < botones.length-2; i++) {
-                    for (int j = 1; j < botones[i].length-1; j++) {
-                        //Lectura Esquinas donde 9=n-1
-                        if (botones[0][0].getText().equals(".")||botones[0][9].getText().equals(".")||botones[9][0].getText().equals(".")||botones[9][9].getText().equals(".")) {
-                        if (botones[0][0].getText().equals(".")) {botones[0][1].setText("X"); botones[1][0].setText("X"); botones[1][1].setText("X");}   
-                        if (botones[0][9].getText().equals(".")) {botones[0][8].setText("X"); botones[1][8].setText("X"); botones[1][9].setText("X");} 
-                        if (botones[9][0].getText().equals(".")) {botones[8][0].setText("X"); botones[8][1].setText("X"); botones[9][1].setText("X");}
-                        if (botones[9][9].getText().equals(".")) {botones[8][8].setText("X"); botones[8][9].setText("X"); botones[9][8].setText("X");}
-                        }else
-                       
-                        //Lectura bordes
-                       if (botones[i][0].getText().equals(".")||botones[i][9].getText().equals(".")||botones[0][j+1].getText().equals(".")||botones[9][j+1].getText().equals(".")) {
-                            
-                            if (botones[i][0].getText().equals(".")) {botones[i-1][0].setText("X"); botones[i-1][1].setText("X"); botones[i][1].setText("X"); botones[i+1][0].setText("X"); botones[i+1][1].setText("X");}
-                            if (botones[i][9].getText().equals(".")) {botones[i-1][8].setText("Y"); botones[i-1][9].setText("Y"); botones[i][8].setText("Y"); botones[i+1][8].setText("Y"); botones[i+1][9].setText("Y"); }
-                            if (botones[0][j].getText().equals(".")) {botones[0][j-1].setText("Y"); botones[0][j+1].setText("Y"); botones[1][j-1].setText("Y"); botones[1][j].setText("Y"); botones[1][j+1].setText("Y"); }
-                            if (botones[9][j].getText().equals(".")) {botones[8][j-1].setText("X"); botones[8][j].setText("X"); botones[8][j+1].setText("X"); botones[9][j-1].setText("X"); botones[9][j+1].setText("X"); }
-                        }else
-                           //Lectura parte interna 
-                    
-                           
-                       if (botones[i][j].getText().equals(".")) {
-                           
-                       botones[i-1][j].setText("X"); 
-                       botones[i-1][j+1].setText("X"); 
-                       botones[i][j+1].setText("X"); 
-                       botones[i+1][j].setText("X"); 
-                       botones[i+1][j+1].setText("X");
-                       botones[i][j-1].setText("Y"); 
-                       botones[i+1][j-1].setText("Y");
-                       botones[i-1][j-1].setText("Y");
-                       
-                       }
-                      
-                          
-                        
-                        
-                        
-                    }
-                    
-                }
-                
-               */
-                
-                
-
             }
 
         });
@@ -131,7 +85,7 @@ int contj=0;
     }
 
     public void Btn1() {
-        int n = 10;
+         n = 6;
         int tam = n;
         botones = new Btn[tam][tam];
         Tablero.setLayout(new GridLayout(tam, tam));
@@ -149,41 +103,116 @@ int contj=0;
     private class Hilo extends Thread {
 
         public void run() {
+
             
-            while(true){
-                for (int i = 1; i < botones.length-2; i++) {
+           // while(true){
+            int vivo1=0;
+     
+                
+                for (int i = 1; i < botones.length-1; i++) {
                     for (int j = 1; j < botones[i].length-1; j++) {
+
+            
+            
+            //Verificacion interna
+                        if (botones[i][j].getText().equals("")) {
+                            if (botones[i-1][j-1].getText().equals(".")) {vivo1=1;}
+                            if (botones[i-1][j].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i-1][j+1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i][j-1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i][j+1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i+1][j-1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i+1][j].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i+1][j+1].getText().equals(".")) {vivo1=vivo1+1;}
+                            botones[i][j].setText(Integer.toString(vivo1));
+                            vivo1=0;
+                        }
+                     //Fin verificacion Interna 
+                     
+                        //Lectura Esquinas donde 9=n-1 y 8 n-2
                         
-                        //Lectura parte interna
-                        if (botones[i][j].getText().equals(".")) {
-                            if (botones[i-1][j].getText().equals("")) { }
-                          
-                            
-                            //esquina superior izquierda
-                            botones[i-1][j-1].setText("X");
-                            // arriba centro
-                            botones[i-1][j].setText("X");
-                            //esquina superior derecha
-                            botones[i-1][j+1].setText("X");
-                            //medio izquierda
-                            botones[i][j-1].setText("X");
-                            //medio derecha
-                            botones[i][j+1].setText("x");
-                             //esquina Inferior izquierda
-                            botones[i+1][j-1].setText("X");
-                            //abajo centro
-                            botones[i+1][j].setText("X");
-                            //Esquina Inferior derecha
-                            botones[i+1][j+1].setText("X");
-                            
-                           
-                            
+                        if (botones[0][0].getText().equals("")) {
+                            if (botones[0][1].getText().equals(".")) {vivo1=1;}
+                            if (botones[1][0].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[1][1].getText().equals(".")) {vivo1=vivo1+1;}
+                            botones[0][0].setText(Integer.toString(vivo1));
+                            vivo1=0;
+                        }  
+                        if (botones[0][n-1].getText().equals("")) {
+                            if (botones[0][n-2].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[1][n-2].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[1][n-1].getText().equals(".")) {vivo1=vivo1+1;}
+                            botones[0][n-1].setText(Integer.toString(vivo1));
+                            vivo1=0;
+                        } 
+                        if (botones[n-1][0].getText().equals("")) {
+                            if (botones[n-2][0].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[n-2][1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[n-1][1].getText().equals(".")) {vivo1=vivo1+1;}
+                            botones[n-1][0].setText(Integer.toString(vivo1));
+                            vivo1=0;
+                        }
+                        if (botones[n-1][n-1].getText().equals("")) {
+                            if (botones[n-2][n-2].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[n-2][n-1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[n-1][n-2].getText().equals(".")) {vivo1=vivo1+1;}
+                            botones[n-1][n-1].setText(Integer.toString(vivo1));
+                            vivo1=0;
+                        }
+                        //FinLecturaEsquinas
+
+                                             //LecturaBordes 9=i-1 y 8= j-2
+                        if (botones[i][0].getText().equals("")) {
+                            if (botones[i-1][0].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i-1][1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i][1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i+1][1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i+1][0].getText().equals(".")) {vivo1=vivo1+1;}
+                   
+                            botones[i][0].setText(Integer.toString(vivo1));
+                            vivo1=0;
                             
                         }
                         
+                        if (botones[i][n-1].getText().equals("")) {
+                            if (botones[i-1][n-2].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i-1][n-1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i][n-2].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i+1][n-2].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[i+1][n-1].getText().equals(".")) {vivo1=vivo1+1;}
+                            
+                            botones[i][n-1].setText(Integer.toString(vivo1));
+                            vivo1=0;
+                           
+                        }
+                           
+                        if (botones[0][j].getText().equals("")) {
+                            if (botones[0][j-1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[1][j-1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[1][j].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[1][j+1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[0][j+1].getText().equals(".")) {vivo1=vivo1+1;}
+                            
+                            botones[0][j].setText(Integer.toString(vivo1));
+                            vivo1=0;
+                            
+                        }
+                        if (botones[n-1][j].getText().equals("")) {
+                            if (botones[n-2][j-1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[n-2][j].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[n-2][j+1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[n-1][j-1].getText().equals(".")) {vivo1=vivo1+1;}
+                            if (botones[n-1][j+1].getText().equals(".")) {vivo1=vivo1+1;}
+                               
+                            botones[n-1][j].setText(Integer.toString(vivo1));
+                            vivo1=0;
+                            
+                        }
+                        //FinLecturaBordes
+                        
                     }
                 }
-            }
+             //}
 
 
 

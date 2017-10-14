@@ -12,8 +12,8 @@ public class Inicio extends JFrame{
     JTextField Gamer;
     private JButton Start, Cancel;
     private JLabel Jug1,Tam1;
-    JTextField tam1;
-    public static String Gama,Tama;
+    public static JTextField tam1;
+    public String Gama,Tama;
    
     public Inicio(){
         setSize(350,250);
@@ -24,7 +24,7 @@ public class Inicio extends JFrame{
         Jug1 = new JLabel("Gamer : ");
         Gamer = new JTextField(Gama);
         Tam1 = new JLabel("Tamaño: ");
-        tam1 = new JTextField(Tama);
+        tam1 = new JTextField("");
         Start = new JButton("Start");
         Cancel = new JButton("Cancel");
         
@@ -37,7 +37,8 @@ public class Inicio extends JFrame{
         add(Start);
         add(Cancel);
         
-        Tama = tam1.getText();
+       
+        
         
         Jug1.reshape(20,20,100,30);
         Gamer.reshape(70,20,100,30);
@@ -46,6 +47,9 @@ public class Inicio extends JFrame{
         Start.reshape(30,120,100,30);
         Cancel.reshape(160,120,100,30);
 
+         Tama = tam1.getText();
+         tam1.setText(Tama);
+         
              Start.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent evt) {

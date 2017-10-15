@@ -52,7 +52,7 @@ public class Ventana extends JFrame {
         jSlider1 = new javax.swing.JSlider();
         Pausa = new JButton("Start");
         Pausa1 = new JButton("Pausa");
-        Estab = new JButton("Restart");
+        Estab = new JButton("Continuar");
         Tablero = new JPanel();
         Vel.setForeground(Color.WHITE); 
         Jug.setForeground(Color.WHITE); 
